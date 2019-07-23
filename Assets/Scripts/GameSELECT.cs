@@ -5,13 +5,22 @@ using UnityEngine;
 public class GameSELECT : GameFSMState
 {
 
+    public GameObject lockBody, key, keySide;
     public GameObject selectBox;
-
+    public GameObject keySilhouette;
+    
     private int currentPiece;
 
     public override void BeginState()
     {
         base.BeginState();
+
+        keySide.SetActive(false);
+        lockBody.transform.position = new Vector3(-3.87f, 7.67f, lockBody.transform.position.z);
+        key.transform.position = new Vector3(-3.87f, -8.19f, key.transform.position.z);
+        keySilhouette.SetActive(true);
+        key.SetActive(true);
+        StartCoroutine("FadeIn");
 
         GameManager.instance.SetKeyShape();
         for(int i = 0; i < 3; i++)
@@ -26,6 +35,17 @@ public class GameSELECT : GameFSMState
         selectBox.SetActive(true);
         SetSelectedBox();
         GameManager.instance.SetButtons(GetRealKey(), currentPiece);
+    }
+
+    private IEnumerator FadeIn()
+    {
+        for(int i = 0; i < 20; i++)
+        {
+            lockBody.transform.Translate(Vector3.down * 0.25f);
+            key.transform.Translate(Vector3.up * 0.25f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        yield return null;
     }
 
     public void OnKeyButtonClick(int idx)

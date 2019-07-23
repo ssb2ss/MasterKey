@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameFSMState.cs" />
+     <Compile Include="Assets\Scripts\GameGAMEOVER.cs" />
      <Compile Include="Assets\Scripts\GameINSERT.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameSELECT.cs" />

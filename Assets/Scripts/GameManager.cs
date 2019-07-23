@@ -5,7 +5,8 @@ using UnityEngine;
 public enum GameState
 {
     SELECT = 0,
-    INSERT
+    INSERT,
+    GAMEOVER
 }
 
 public class GameManager : MonoBehaviour
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
 
         states.Add(GameState.SELECT, GetComponent<GameSELECT>());
         states.Add(GameState.INSERT, GetComponent<GameINSERT>());
+        states.Add(GameState.GAMEOVER, GetComponent<GameGAMEOVER>());
     }
 
     private void Start()
