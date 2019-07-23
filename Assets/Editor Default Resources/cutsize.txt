@@ -1,0 +1,4 @@
+total height : 60 220 370 520
+depth : 21
+one block size : 50
+middle count : 8
