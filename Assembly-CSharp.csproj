@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\GameINSERT.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameSELECT.cs" />
+    <Compile Include="Assets\Scripts\GameTIMEOUT.cs" />
     <Compile Include="Assets\Scripts\KeyPiece.cs" />
     <Compile Include="Assets\Scripts\SelectBox.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonManager.cs" />

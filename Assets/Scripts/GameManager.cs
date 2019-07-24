@@ -7,7 +7,8 @@ public enum GameState
 {
     SELECT = 0,
     INSERT,
-    GAMEOVER
+    GAMEOVER,
+    TIMEOUT
 }
 
 public class GameManager : MonoBehaviour
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         states.Add(GameState.SELECT, GetComponent<GameSELECT>());
         states.Add(GameState.INSERT, GetComponent<GameINSERT>());
         states.Add(GameState.GAMEOVER, GetComponent<GameGAMEOVER>());
+        states.Add(GameState.TIMEOUT, GetComponent<GameTIMEOUT>());
 
         detectRadius *= Screen.width;
     }

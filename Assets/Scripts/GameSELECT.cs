@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameSELECT : GameFSMState
 {
@@ -8,8 +9,12 @@ public class GameSELECT : GameFSMState
     public GameObject lockBody, key, keySide;
     public GameObject selectBox;
     public GameObject keySilhouette;
+    public Text timeText;
+    public float firstTime;
     
     private int currentPiece;
+    private float startTime;
+    private float remainTime;
 
     public override void BeginState()
     {
@@ -37,6 +42,20 @@ public class GameSELECT : GameFSMState
         selectBox.SetActive(true);
         SetSelectedBox();
         GameManager.instance.SetButtons(GetRealKey(), currentPiece);
+
+        startTime = firstTime - GameManager.instance.score * 0.5f;
+        remainTime = startTime;
+    }
+
+    private void Update()
+    {
+        remainTime -= Time.deltaTime;
+        timeText.text = remainTime.ToString("N2");
+        if (remainTime <= 0)
+        {
+            GameManager.instance.SetState(GameState.TIMEOUT);
+            return;
+        }
     }
 
     private IEnumerator FadeIn()
