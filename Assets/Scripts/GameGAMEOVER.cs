@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameGAMEOVER : GameFSMState
 {
 
     public GameObject key, lockBody;
     public float gravityScale, rotScale;
+    public GameObject gameover;
 
     private int moveState;
     private float currentGravity, currentRot;
@@ -17,6 +19,7 @@ public class GameGAMEOVER : GameFSMState
 
         moveState = 0;
         currentGravity = currentRot = 0;
+        gameover.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         StartCoroutine("KeyShake");
     }
 
@@ -30,8 +33,10 @@ public class GameGAMEOVER : GameFSMState
             lockBody.transform.position = new Vector3(lockBody.transform.position.x, lockBody.transform.position.y - currentGravity, lockBody.transform.position.z);
             key.transform.Rotate(0, 0, key.transform.rotation.z + currentRot);
             lockBody.transform.Rotate(0, 0, lockBody.transform.rotation.z + currentRot);
-            if (lockBody.transform.position.z < -10)
+            gameover.GetComponent<Image>().color = new Color(1, 1, 1, gameover.GetComponent<Image>().color.a + 0.1f);
+            if (lockBody.transform.position.y < -100)
             {
+                gameover.SetActive(false);
                 GameManager.instance.ChangeGameoverScene();
                 return;
             }
@@ -55,6 +60,7 @@ public class GameGAMEOVER : GameFSMState
         }
         key.transform.position = new Vector3(-3.87f, key.transform.position.y, key.transform.position.z);
         yield return new WaitForSeconds(0.5f);
+        gameover.SetActive(true);
         moveState = 1;
         yield return null;
     }

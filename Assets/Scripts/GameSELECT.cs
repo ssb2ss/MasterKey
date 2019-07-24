@@ -44,6 +44,10 @@ public class GameSELECT : GameFSMState
         GameManager.instance.SetButtons(GetRealKey(), currentPiece);
 
         startTime = firstTime - GameManager.instance.score * 0.5f;
+        if (startTime < 8)
+        {
+            startTime = 8;
+        }
         remainTime = startTime;
     }
 
@@ -53,6 +57,7 @@ public class GameSELECT : GameFSMState
         timeText.text = remainTime.ToString("N2");
         if (remainTime <= 0)
         {
+            timeText.text = "0";
             GameManager.instance.SetState(GameState.TIMEOUT);
             return;
         }

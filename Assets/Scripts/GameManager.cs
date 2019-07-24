@@ -130,7 +130,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeGameoverScene()
     {
+        PlayerPrefs.SetInt("currentScore", score);
         SceneManager.LoadScene("GameoverScene");
+        return;
     }
 
     public void Drag(int idx)
