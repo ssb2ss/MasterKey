@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameINSERT : GameFSMState
 {
@@ -8,6 +9,8 @@ public class GameINSERT : GameFSMState
     public GameObject lockBody, lockHead, key;
     public GameObject keySilhouette, keySide;
     public float moveSpeed;
+
+    public Text scoreText;
 
     private int moveState;
 
@@ -19,8 +22,8 @@ public class GameINSERT : GameFSMState
         {
             GameManager.instance.buttonManager.button[i].SetActive(false);
         }
+        lockHead.transform.localPosition = new Vector3(0, 3, 0);
         moveState = 0;
-        Debug.Log("insert key");
     }
 
     private void Update()
@@ -78,6 +81,7 @@ public class GameINSERT : GameFSMState
     private void ScoreUp()
     {
         GameManager.instance.score++;
+        scoreText.text = "푼 자물쇠 : " + GameManager.instance.score + "개";
         keySilhouette.SetActive(false);
         keySide.transform.position = new Vector3(key.transform.position.x + 0.15f, key.transform.position.y - 0.53f, keySide.transform.position.z);
         key.SetActive(false);

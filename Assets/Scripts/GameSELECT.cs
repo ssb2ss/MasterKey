@@ -18,6 +18,8 @@ public class GameSELECT : GameFSMState
         keySide.SetActive(false);
         lockBody.transform.position = new Vector3(-3.87f, 7.67f, lockBody.transform.position.z);
         key.transform.position = new Vector3(-3.87f, -8.19f, key.transform.position.z);
+        lockBody.transform.rotation = Quaternion.Euler(0, 0, 0);
+        key.transform.rotation = Quaternion.Euler(0, 0, 0);
         keySilhouette.SetActive(true);
         key.SetActive(true);
         StartCoroutine("FadeIn");
@@ -50,8 +52,7 @@ public class GameSELECT : GameFSMState
 
     public void OnKeyButtonClick(int idx)
     {
-        Debug.Log(idx);
-        string selectedPiece = GameManager.instance.buttonManager.button[idx - 1].GetComponent<SetButton>().keyImageCode;
+        string selectedPiece = GameManager.instance.buttonManager.button[idx].GetComponent<SetButton>().keyImageCode;
         GameManager.instance.SetPieceImage(selectedPiece, currentPiece);
         currentPiece++;
         if (currentPiece == 3)

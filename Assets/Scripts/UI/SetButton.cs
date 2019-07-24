@@ -8,6 +8,13 @@ public class SetButton : MonoBehaviour
 
     public Image[] keyImage;
     public string keyImageCode;
+    public float x, y;
+
+    private void Start()
+    {
+        x = transform.position.x;
+        y = transform.position.y;
+    }
 
     public void SetKeyImage(string index)
     {

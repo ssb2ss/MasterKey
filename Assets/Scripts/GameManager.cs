@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int score;
     public int[] realKeyShape;
     public int[] currentKeyShape;
+    public float detectRadius;
 
     public GameState stratState;
     public GameState currentState;
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
         states.Add(GameState.SELECT, GetComponent<GameSELECT>());
         states.Add(GameState.INSERT, GetComponent<GameINSERT>());
         states.Add(GameState.GAMEOVER, GetComponent<GameGAMEOVER>());
+
+        detectRadius *= Screen.width;
     }
 
     private void Start()
@@ -97,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentKeyShape(string key)
     {
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 9; i++)
         {
             if(key[i] == '0')
             {
@@ -120,6 +124,28 @@ public class GameManager : MonoBehaviour
                 currentKeyShape[i] = 4;
             }
         }
+    }
+
+    public void ChangeGameoverScene()
+    {
+        SceneManager.LoadScene("GameoverScene");
+    }
+
+    public void Drag(int idx)
+    {
+        buttonManager.button[idx].transform.position = Input.mousePosition;
+    }
+
+    public void DragEnd(int idx)
+    {
+        Vector3 selectBoxPos = Camera.main.WorldToScreenPoint(GetComponent<GameSELECT>().selectBox.transform.position);
+        Vector3 diffVec = Input.mousePosition - selectBoxPos;
+        float diff = diffVec.sqrMagnitude;
+        if (diff < detectRadius * detectRadius)
+        {
+            GetComponent<GameSELECT>().OnKeyButtonClick(idx);
+        }
+        buttonManager.button[idx].transform.position = new Vector3(buttonManager.button[idx].GetComponent<SetButton>().x, buttonManager.button[idx].GetComponent<SetButton>().y, 0);
     }
 
 }
