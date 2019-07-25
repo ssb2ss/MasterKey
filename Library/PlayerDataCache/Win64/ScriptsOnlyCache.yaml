@@ -920,4 +920,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainScene.unity
   - Assets/Scenes/GameScene.unity
   - Assets/Scenes/GameoverScene.unity
-  playerPath: "D:/\u3141\u3147/\uD734\uC9C0\uD1B5/\uACE0\uB4F1\uD559\uAD50/2\uD559\uB144/\uC18C\uC218\uC804\uACF5/\uB9C8\uC2A4\uD130\uD0A4/MasterKey.exe"
+  playerPath: C:/Users/Sunrin/Desktop/MasterKey/MasterKey.exe
