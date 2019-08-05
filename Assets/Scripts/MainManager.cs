@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainManager : MonoBehaviour
 {
 
+    public Camera mainCamera;
     public Text text;
 
     private bool isAlphaUp;
@@ -14,7 +15,21 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.SetResolution(Screen.width, Screen.width * 9 / 16, true);
+
+        Rect rect = mainCamera.rect;
+        float scaleheight = ((float)Screen.width / Screen.height) / ((float)16 / 9);
+        float scalewidth = 1f / scaleheight;
+        if (scaleheight < 1)
+        {
+            rect.height = scaleheight;
+            rect.y = (1f - scaleheight) / 2f;
+        }
+        else
+        {
+            rect.width = scalewidth;
+            rect.x = (1f - scalewidth) / 2f;
+        }
+        mainCamera.rect = rect;
     }
 
     private void Start()

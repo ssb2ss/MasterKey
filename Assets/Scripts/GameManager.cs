@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    public Camera mainCamera;
+
     public int score;
     public int[] realKeyShape;
     public int[] currentKeyShape;
@@ -43,6 +45,21 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        Rect rect = mainCamera.rect;
+        float scaleheight = ((float)Screen.width / Screen.height) / ((float)16 / 9);
+        float scalewidth = 1f / scaleheight;
+        if (scaleheight < 1)
+        {
+            rect.height = scaleheight;
+            rect.y = (1f - scaleheight) / 2f;
+        }
+        else
+        {
+            rect.width = scalewidth;
+            rect.x = (1f - scalewidth) / 2f;
+        }
+        mainCamera.rect = rect;
 
         realKeyShape = new int[9];
         currentKeyShape = new int[9];
@@ -137,19 +154,19 @@ public class GameManager : MonoBehaviour
 
     public void Drag(int idx)
     {
-        buttonManager.button[idx].transform.position = Input.mousePosition;
+        buttonManager.button[idx].transform.position = new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, mainCamera.ScreenToWorldPoint(Input.mousePosition).y, 90);
     }
 
     public void DragEnd(int idx)
     {
-        Vector3 selectBoxPos = Camera.main.WorldToScreenPoint(GetComponent<GameSELECT>().selectBox.transform.position);
-        Vector3 diffVec = Input.mousePosition - selectBoxPos;
+        Vector3 selectBoxPos = GetComponent<GameSELECT>().selectBox.transform.position;
+        Vector3 diffVec = mainCamera.ScreenToWorldPoint(Input.mousePosition) - selectBoxPos;
         float diff = diffVec.sqrMagnitude;
         if (diff < detectRadius * detectRadius)
         {
             GetComponent<GameSELECT>().OnKeyButtonClick(idx);
         }
-        buttonManager.button[idx].transform.position = new Vector3(buttonManager.button[idx].GetComponent<SetButton>().x, buttonManager.button[idx].GetComponent<SetButton>().y, 0);
+        buttonManager.button[idx].transform.position = new Vector3(buttonManager.button[idx].GetComponent<SetButton>().x, buttonManager.button[idx].GetComponent<SetButton>().y, 90);
     }
 
 }
