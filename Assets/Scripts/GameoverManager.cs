@@ -33,7 +33,16 @@ public class GameoverManager : MonoBehaviour
     private void Start()
     {
         int score = PlayerPrefs.GetInt("currentScore", 0);
-        text.text = "당신은 " + score + "개의 자물쇠를 열었습니다!";
+        if (PlayerPrefs.GetInt("Language") == 0)
+        {
+            text.text = "당신은 " + score + "개의 자물쇠를 열었습니다!";
+            tabtorestart.text = "화면을 누르세요";
+        }
+        else
+        {
+            text.text = "You unlocked " + score + " locks!";
+            tabtorestart.text = "Tab to Restart";
+        }
         isAlphaUp = true;
         tabtorestart.color = new Color(1, 1, 1, 0);
         StartCoroutine(Blinking());

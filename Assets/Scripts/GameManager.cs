@@ -37,14 +37,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if(instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-            return;
-        }
 
         Rect rect = mainCamera.rect;
         float scaleheight = ((float)Screen.width / Screen.height) / ((float)16 / 9);
@@ -69,12 +64,15 @@ public class GameManager : MonoBehaviour
         states.Add(GameState.INSERT, GetComponent<GameINSERT>());
         states.Add(GameState.GAMEOVER, GetComponent<GameGAMEOVER>());
         states.Add(GameState.TIMEOUT, GetComponent<GameTIMEOUT>());
-
-        detectRadius *= Screen.width;
     }
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("Language") == 0)
+            GetComponent<GameINSERT>().scoreText.text = "푼 자물쇠 : " + score + "개";
+        else
+            GetComponent<GameINSERT>().scoreText.text = "Unlock : " + score;
+
         SetState(stratState);
     }
 

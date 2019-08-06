@@ -482,7 +482,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tab to Restart
+  m_Text: "\uD654\uBA74\uC744 \uB204\uB974\uC138\uC694"
 --- !u!222 &1240787092
 CanvasRenderer:
   m_ObjectHideFlags: 0

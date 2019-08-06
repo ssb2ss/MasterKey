@@ -81,7 +81,10 @@ public class GameINSERT : GameFSMState
     private void ScoreUp()
     {
         GameManager.instance.score++;
-        scoreText.text = "푼 자물쇠 : " + GameManager.instance.score + "개";
+        if (PlayerPrefs.GetInt("Language") == 0)
+            scoreText.text = "푼 자물쇠 : " + GameManager.instance.score + "개";
+        else
+            scoreText.text = "Unlock : " + GameManager.instance.score;
         keySilhouette.SetActive(false);
         keySide.transform.position = new Vector3(key.transform.position.x + 0.15f, key.transform.position.y - 0.53f, keySide.transform.position.z);
         key.SetActive(false);

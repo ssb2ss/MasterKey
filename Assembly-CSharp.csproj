@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BGMManager.cs" />
      <Compile Include="Assets\Scripts\GameFSMState.cs" />
      <Compile Include="Assets\Scripts\GameGAMEOVER.cs" />
      <Compile Include="Assets\Scripts\GameINSERT.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\KeyPiece.cs" />
      <Compile Include="Assets\Scripts\MainManager.cs" />
      <Compile Include="Assets\Scripts\SelectBox.cs" />
+     <Compile Include="Assets\Scripts\SFXManager.cs" />
      <Compile Include="Assets\Scripts\UI\ButtonManager.cs" />
      <Compile Include="Assets\Scripts\UI\SetButton.cs" />
  <Reference Include="Unity.Timeline.Editor">

@@ -2589,7 +2589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -759.82, y: 480.1}
+  m_AnchoredPosition: {x: -739.82, y: 480.1}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150418177
@@ -3774,7 +3774,7 @@ MonoBehaviour:
   score: 0
   realKeyShape: 
   currentKeyShape: 
-  detectRadius: 0.017
+  detectRadius: 11
   stratState: 0
   currentState: 0
   keySprite:
@@ -5237,7 +5237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -710, y: -480.00003}
+  m_AnchoredPosition: {x: -690, y: -480.00003}
   m_SizeDelta: {x: 500, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2082077920

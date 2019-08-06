@@ -10,7 +10,14 @@ public class MainManager : MonoBehaviour
     public Camera mainCamera;
     public Text text;
 
+    public GameObject settingUI;
+
+    public Text languageText, sfxText, bgmText;
+    public Image korean, english;
+    public Slider bgmSlider, sfxSlider;
+
     private bool isAlphaUp;
+    private bool isEnglish;
     
     private void Awake()
     {
@@ -34,7 +41,34 @@ public class MainManager : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("Language", -1) == -1)
+        {
+            if(Application.systemLanguage == SystemLanguage.Korean)
+            {
+                PlayerPrefs.SetInt("Language", 0);
+                isEnglish = false;
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Language", 1);
+                isEnglish = true;
+            }
+        }
+        else if (PlayerPrefs.GetInt("Language") == 0)
+        {
+            isEnglish = false;
+        }
+        else
+        {
+            isEnglish = true;
+        }
+        UpdateLanguage();
+
+        bgmSlider.value = PlayerPrefs.GetFloat("BGMvolume", 1);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXvolume", 1);
+
         text.color = new Color(1, 1, 1, 0);
+        settingUI.SetActive(false);
         isAlphaUp = true;
         StartCoroutine(Blinking());
     }
@@ -43,6 +77,56 @@ public class MainManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
         return;
+    }
+
+    public void OnClickSetting(int mode)
+    {
+        if (mode == 0)
+        {
+            settingUI.SetActive(true);
+        }
+        else
+        {
+            settingUI.SetActive(false);
+        }
+    }
+
+    public void SetLanguage(int mode)
+    {
+        if(mode == 0)
+        {
+            PlayerPrefs.SetInt("Language", 0);
+            isEnglish = false;
+            UpdateLanguage();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Language", 1);
+            isEnglish = true;
+            UpdateLanguage();
+        }
+    }
+
+    private void UpdateLanguage()
+    {
+        if (isEnglish)
+        {
+            text.text = "Tab to Start";
+            languageText.text = "Language";
+            sfxText.text = "SFX Volume";
+            bgmText.text = "BGM Volume";
+            korean.color = new Color(0.5f, 0.5f, 0.5f, 1);
+            english.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            text.text = "화면을 누르세요";
+            languageText.text = "언어 설정";
+            sfxText.text = "효과음 음량";
+            bgmText.text = "배경음 음량";
+            korean.color = new Color(1, 1, 1, 1);
+            english.color = new Color(0.5f, 0.5f, 0.5f, 1);
+        }
     }
 
     private IEnumerator Blinking()
