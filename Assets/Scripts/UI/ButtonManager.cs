@@ -10,10 +10,17 @@ public class ButtonManager : MonoBehaviour
     public void ShuffleKeyImage(string realKey, bool isEnd)
     {
         string[] keyIndex = new string[6];
-        keyIndex[Random.Range(0, 6)] = realKey;
-        for(int i = 0; i < 6; i++)
+        int realKeyIndex = Random.Range(0, 6);
+        keyIndex[realKeyIndex] = realKey;
+        for(int i = 0; i < 6;)
         {
-            if (keyIndex[i] == null)
+            if (i == realKeyIndex)
+            {
+                button[i].GetComponent<SetButton>().SetKeyImage(keyIndex[i]);
+                i++;
+                continue;
+            }
+            else
             {
                 int tem1 = Random.Range(0, 4);
                 int tem2 = Random.Range(0, 4);
@@ -24,7 +31,24 @@ public class ButtonManager : MonoBehaviour
                     tem3 = Random.Range(0, 4);
                 keyIndex[i] = "" + tem1 + tem2 + tem3;
             }
+
+            if(keyIndex[i] == realKey)
+                continue;
+
+            bool isWrong = false;
+            for(int j = 0; j < i; j++)
+            {
+                if(keyIndex[i] == keyIndex[j])
+                {
+                    isWrong = true;
+                    break;
+                }
+            }
+            if (isWrong)
+                continue;
+
             button[i].GetComponent<SetButton>().SetKeyImage(keyIndex[i]);
+            i++;
         }
     }
     
